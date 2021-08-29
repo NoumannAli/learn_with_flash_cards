@@ -5,6 +5,8 @@ import random
 
 # -----------------------------------------------    CONSTANT    -------------------------------------- #
 BACKGROUND_COLOR = "#B1DDC6"
+current_card = {}
+to_learn = {}
 
 # ----------------------------------------------- GENERATE WORDS -------------------------------------- #
 try:
@@ -14,7 +16,7 @@ except FileNotFoundError:
     to_learn = original_data.to_dict(orient="records")
 else:
     to_learn = data.to_dict(orient="records")
-    current_card = {}
+
 
 
 # --------------------------------------------- MANAGE CARDS ------------------------------------------ #
@@ -37,10 +39,7 @@ def flip_card():
 def to_know():
     to_learn.remove(current_card)
     words_to_know = pd.DataFrame(to_learn)
-    words_to_know.to_csv("data/words_to_know.csv")
-
-    print(len(words_to_know))
-
+    words_to_know.to_csv("data/words_to_know.csv", index= False)
     next_card()
 
 
